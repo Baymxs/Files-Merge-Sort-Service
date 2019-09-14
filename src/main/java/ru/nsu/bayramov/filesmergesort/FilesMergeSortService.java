@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class FilesMergeSortService {
+    private CommandLineParser commandLineParser;
+
     private int sortMode;
     private int dataType;
     private String outputFileName;
@@ -17,9 +19,7 @@ public class FilesMergeSortService {
 
     private DataSorting dataSorting;
 
-    private void setOptions(String[] args) throws WrongArgException {
-        CommandLineParser commandLineParser = new CommandLineParser(args);
-
+    private void setOptions() throws WrongArgException {
         sortMode = commandLineParser.getSortMode();
         dataType = commandLineParser.getDataType();
         outputFileName = commandLineParser.getOutputFileName();
@@ -27,7 +27,14 @@ public class FilesMergeSortService {
     }
 
     public void sort(String[] args) throws InterruptedException, IOException {
-       setOptions(args);
+        commandLineParser = new CommandLineParser(args);
+
+        if (commandLineParser.getHelp()) {
+            commandLineParser.showHelp();
+            return;
+        }
+
+        setOptions();
 
         if (dataType == 0) {
             dataSorting = new IntegerDataSorting();

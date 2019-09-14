@@ -6,28 +6,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandLineArgs {
-    @Parameter(names = "-a", description = "Sort files in ascending order")
+    @Parameter(names = "-h", description = "Shows information about program options", help = true)
+    private boolean help;
+
+    public boolean getHelpOption() {
+        return  help;
+    }
+
+    @Parameter(names = "-a", description = "Sort data in ascending order")
     private boolean ascendingSort;
 
     public boolean getAscendingSortOption() {
         return ascendingSort;
     }
 
-    @Parameter(names = "-d", description = "Sort files in descending order")
+    @Parameter(names = "-d", description = " Sort data in descending order")
     private boolean descendingSort;
 
     public boolean getDescendingSortOption() {
         return descendingSort;
     }
 
-    @Parameter(names = "-s", description = "String data")
+    @Parameter(names = "-s", description = "Sort data of type string")
     private boolean stringData;
 
     public boolean getStringDataOption() {
         return stringData;
     }
 
-    @Parameter(names = "-i", description = "Integer data")
+    @Parameter(names = "-i", description = "Sort data of type integer")
     private boolean integerData;
 
     public boolean getIntegerDataOption() {

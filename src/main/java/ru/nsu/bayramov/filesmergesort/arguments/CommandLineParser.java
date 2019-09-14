@@ -15,6 +15,14 @@ public class CommandLineParser {
         JCommander.newBuilder().addObject(commandLineArgs).build().parse(Arrays.copyOfRange(args, 0, args.length));
     }
 
+    public boolean getHelp() {
+        return commandLineArgs.getHelpOption();
+    }
+
+    public void showHelp() {
+        JCommander.newBuilder().addObject(commandLineArgs).build().usage();
+    }
+
     public int getSortMode() throws WrongArgException {
         boolean descendingSortOption = commandLineArgs.getDescendingSortOption();
         boolean ascendingSortOption = commandLineArgs.getAscendingSortOption();
@@ -54,4 +62,6 @@ public class CommandLineParser {
     public List<String> getInputFileNames() {
         return commandLineArgs.getFileNames().subList(1, commandLineArgs.getFileNames().size());
     }
+
+
 }
